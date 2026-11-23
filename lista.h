@@ -19,6 +19,8 @@ int salvar(No *lista, const char *nomeArquivo);
 
 int carregar(No **lista, const char *nomeArquivo);
 
+void liberarLista(No **lista);
+
 #endif
 
 

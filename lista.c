@@ -242,3 +242,19 @@ int carregar(No **lista, const char *nomeArquivo) {
     *lista = novaLista;
     return 1;
 }
+
+
+void liberarLista(No **lista) {
+    No *atual = *lista;
+
+    while (atual != NULL) {
+        No *proximo = atual->proximo;
+
+        free(atual->dados);
+        free(atual);
+
+        atual = proximo;
+    }
+
+    *lista = NULL;
+}
