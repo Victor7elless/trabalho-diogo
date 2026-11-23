@@ -15,6 +15,8 @@ No *buscar(No *lista, int tipo, void *dados);
 
 int remover(No **lista, int tipo, void *dados);
 
+int salvar(No *lista, const char *nomeArquivo);
+
 #endif
 
 

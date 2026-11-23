@@ -117,3 +117,44 @@ int remover(No **lista, int tipo, void *dados) {
     }
     return 0;
 }
+
+int salvar(No *lista, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "wb");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return 0;
+    }
+
+    No *atual = lista;
+
+    while (atual != NULL) {
+        int tamanho = 0;
+
+        if (atual->tipo == 1) {
+            tamanho = sizeof(int);
+        }
+        else if (atual->tipo == 2) {
+            tamanho = sizeof(float);
+        } else if (atual->tipo == 3) {
+            tamanho = strlen((char *)atual->dados) + 1;
+        }
+        else {
+            fclose(arquivo);
+            return 0;
+        }
+        if (fwrite(&atual->tipo, sizeof(int), 1, arquivo) != 1 ||
+            fwrite(&tamanho, sizeof(int), 1, arquivo) != 1 ||
+            fwrite(atual->dados, 1, tamanho, arquivo) != (size_t)tamanho) {
+            fclose(arquivo);
+            return 0;
+        }
+
+        atual = atual->proximo;
+
+    }
+
+    if (fclose(arquivo) != 0) {
+        return 0;
+    }  
+    return 1;
+}

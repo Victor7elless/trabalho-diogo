@@ -33,5 +33,13 @@ int main() {
 
     imprimir(lista);
 
+    
+    printf("\n=== Salvando lista em arquivo ===\n");
+    if (salvar(lista, "lista.bin")) {
+        printf("Lista salva com sucesso.\n");
+    } else {
+        printf("Erro ao salvar a lista.\n");
+    }
+
     return 0;
 }
