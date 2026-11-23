@@ -13,6 +13,8 @@ void imprimir(No *lista);
 
 No *buscar(No *lista, int tipo, void *dados);
 
+int remover(No **lista, int tipo, void *dados);
+
 #endif
 
 

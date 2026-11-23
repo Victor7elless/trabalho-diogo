@@ -22,5 +22,16 @@ int main() {
     } else {
         printf("Elemento não encontrado.\n");
     }
+
+    printf("\n=== Remoção de elementos ===\n");
+    float valorRemover = 8.5;
+    if (remover(&lista, 2, &valorRemover)) {
+        printf("Elemento removido com sucesso.\n");
+    } else {
+        printf("Elemento não encontrado para remoção.\n");
+    }
+
+    imprimir(lista);
+
     return 0;
 }

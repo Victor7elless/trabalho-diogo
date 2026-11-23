@@ -85,3 +85,35 @@ No *buscar(No *lista, int tipo, void *dados) {
     }
     return NULL;
 }
+
+int remover(No **lista, int tipo, void *dados) {
+    No *atual = *lista;
+    No *anterior = NULL;
+
+    while (atual != NULL) {
+        int encontrado = 0;
+
+        if (atual->tipo == tipo) {
+            if (tipo == 1) {
+                encontrado = (*(int *)atual->dados == *(int *)dados);
+            } else if (tipo == 2) {
+                encontrado = (*(float *)atual->dados == *(float *)dados);
+            } else if (tipo == 3) {
+                encontrado = (strcmp((char *)atual->dados, (char *)dados) == 0);
+            }
+        }
+        if (encontrado) {
+            if (anterior == NULL) {
+                *lista = atual->proximo;
+            } else {
+                anterior->proximo = atual->proximo;
+            }
+            free(atual->dados);
+            free(atual);
+            return 1;
+        }
+        anterior = atual;
+        atual = atual->proximo;
+    }
+    return 0;
+}
