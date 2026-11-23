@@ -41,5 +41,16 @@ int main() {
         printf("Erro ao salvar a lista.\n");
     }
 
+    // Testando o carregamento do arquivo binario
+    printf("\n=== TESTE DE CARREGAMENTO ===\n");
+
+    if (carregar(&lista, "lista.bin")) {
+        printf("Lista carregada com sucesso!\n");
+        imprimir(lista);
+    } else {
+        printf("Erro ao carregar a lista!\n");
+    }
+
+
     return 0;
 }

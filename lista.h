@@ -17,6 +17,8 @@ int remover(No **lista, int tipo, void *dados);
 
 int salvar(No *lista, const char *nomeArquivo);
 
+int carregar(No **lista, const char *nomeArquivo);
+
 #endif
 
 

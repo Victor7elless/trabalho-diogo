@@ -158,3 +158,87 @@ int salvar(No *lista, const char *nomeArquivo) {
     }  
     return 1;
 }
+
+int carregar(No **lista, const char *nomeArquivo) {
+    FILE *arquivo = fopen(nomeArquivo, "rb");
+
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo!\n");
+        return 0;
+    }
+
+    No *novaLista = NULL;
+    No *ultimo = NULL;
+
+    int tipo;
+    int tamanho;
+
+    while (fread(&tipo, sizeof(int), 1, arquivo) == 1) {
+        if (fread(&tamanho, sizeof(int), 1, arquivo) != 1) {
+            break;
+        }
+
+        if ((tipo == 1 && tamanho != sizeof(int)) ||
+            (tipo == 2 && tamanho != sizeof(float)) ||
+            (tipo == 3 && (tamanho <= 0 || tamanho > 10000)) ||
+            (tipo < 1 || tipo > 3)) {
+            break;
+        }
+
+        No *novo = malloc(sizeof(No));
+
+        if (novo == NULL) {
+            break;
+        }
+
+        novo->dados = malloc(tamanho);
+
+        if (novo->dados == NULL) {
+            free(novo);
+            break;
+        }
+
+        if (fread(novo->dados, 1, tamanho, arquivo) != (size_t)tamanho) {
+            free(novo->dados);
+            free(novo);
+            break;
+        }
+
+        if (tipo == 3 && ((char *)novo->dados)[tamanho - 1] != '\0') {
+            free(novo->dados);
+            free(novo);
+            break;
+        }
+
+        novo->tipo = tipo;
+        novo->proximo = NULL;
+
+        if (novaLista == NULL) {
+            novaLista = novo;
+        } else {
+            ultimo->proximo = novo;
+        }
+        ultimo = novo;
+    }
+
+    int sucesso = feof(arquivo) && !ferror(arquivo);
+    fclose(arquivo);
+
+    if (!sucesso) {
+        while (novaLista != NULL) {
+            No *temp = novaLista;
+            novaLista = novaLista->proximo;
+            free(temp->dados);
+            free(temp);
+        }
+        return 0;
+    }
+    while (*lista != NULL) {
+        No *temp = *lista;
+        *lista = (*lista)->proximo;
+        free(temp->dados);
+        free(temp);
+    }
+    *lista = novaLista;
+    return 1;
+}
