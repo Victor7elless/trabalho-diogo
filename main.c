@@ -13,7 +13,14 @@ int main() {
     inserir(&lista, 3, texto);
 
     imprimir(lista);
+    printf("\n=== Busca de elementos ===\n");
+    int procurado = 25;
+    No *resultado = buscar(lista, 1, &procurado);
 
-    
+    if (resultado != NULL) {
+        printf("Elemento encontrado: %d\n", *(int *)resultado->dados);
+    } else {
+        printf("Elemento não encontrado.\n");
+    }
     return 0;
 }

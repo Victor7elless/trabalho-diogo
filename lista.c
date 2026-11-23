@@ -64,3 +64,24 @@ void imprimir (No *lista) {
             atual = atual->proximo;
         }
     }
+
+No *buscar(No *lista, int tipo, void *dados) {
+    No *atual = lista;
+
+    while (atual !=NULL) {
+        if (atual->tipo == tipo) {
+            if (tipo == 1 && *(int *)atual->dados == *(int *)dados) {
+                return atual;
+            }
+            if (tipo == 2 && *(float *)atual->dados == *(float *)dados) {
+                return atual;
+            }
+            if (tipo == 3 && strcmp((char *)atual->dados, (char *)dados) == 0) {
+                return atual;
+            }
+        }
+        atual = atual->proximo;
+
+    }
+    return NULL;
+}

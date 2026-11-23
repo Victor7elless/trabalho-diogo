@@ -11,6 +11,8 @@ int inserir(No **lista, int tipo, void *dados);
 
 void imprimir(No *lista);
 
+No *buscar(No *lista, int tipo, void *dados);
+
 #endif
 
 
