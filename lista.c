@@ -31,9 +31,36 @@ int inserir(No **lista, int tipo, void *dados) {
         strcpy((char *)novo->dados, (char *)dados);
     }
 
+    
+
     novo->tipo = tipo;
     novo->proximo = *lista;
     *lista = novo;
 
     return 1;
 }
+
+void imprimir (No *lista) {
+        No *atual = lista;
+
+        if (atual == NULL) {
+            printf("A lista está vazia.\n");
+            return;
+        }
+
+        printf("\n=== Elementos da lista ===\n");
+
+        while (atual != NULL) {
+            if (atual-> tipo == 1) {
+                printf("Inteiro: %d\n", *(int *)atual->dados);
+            }
+            else if (atual->tipo == 2) {
+                printf("Decimal: %.2f\n", *(float *)atual->dados);
+            }
+            else if (atual->tipo == 3) {
+                printf("Texto: %s\n", (char *)atual->dados);
+            }
+
+            atual = atual->proximo;
+        }
+    }

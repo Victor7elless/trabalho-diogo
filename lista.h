@@ -9,6 +9,8 @@ typedef struct No {
 
 int inserir(No **lista, int tipo, void *dados);
 
+void imprimir(No *lista);
+
 #endif
 
 

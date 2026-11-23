@@ -5,14 +5,15 @@ int main() {
     No *lista = NULL;
     
     int numero = 25;
+    float decimal = 8.5;
+    char texto[] = "Olá, mundo!";
 
     inserir(&lista, 1, &numero);
+    inserir(&lista, 2, &decimal);
+    inserir(&lista, 3, texto);
 
-    printf ("=== LISTA ENCADEADA ===\n");
+    imprimir(lista);
 
-    if (lista != NULL) {
-        printf("Valor inserido: %d\n", 
-            *(int *)lista->dados);
-    }
+    
     return 0;
 }
